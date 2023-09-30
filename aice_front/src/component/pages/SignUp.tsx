@@ -59,7 +59,7 @@ export const SignUp: React.FC = () => {
     try {
       setLoading(true);
       event.preventDefault();
-      const response = await fetch("http://127.0.0.1:8000/api/signup", {
+      const response = await fetch('http://localhost:8000/api/signup', {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

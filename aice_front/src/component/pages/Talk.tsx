@@ -43,7 +43,7 @@ export const Talk: FC<TalkProps> = ({ tranceFlg, adviceFlg }) => {
       setLoading(true);
 
       const jwtToken = sessionStorage.getItem('token');
-      const chatHistoryRes = await fetch("http://127.0.0.1:8000/api/get_chat_history", {
+      const chatHistoryRes = await fetch('http://localhost:8000/api/get_chat_history', {
         method: "GET",
         headers: {
           "Authorization": "Bearer " + jwtToken
@@ -74,7 +74,7 @@ export const Talk: FC<TalkProps> = ({ tranceFlg, adviceFlg }) => {
         sendMsg: sendMsg,
       }
       // API実行
-      const openaiRes = await fetch("http://127.0.0.1:8000/api/openai", {
+      const openaiRes = await fetch('http://localhost:8000/api/openai', {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -109,7 +109,7 @@ export const Talk: FC<TalkProps> = ({ tranceFlg, adviceFlg }) => {
         chatHistory: updatedChatHistory,
       }
       // チャット履歴保存
-      const chatHistoryRes = await fetch("http://127.0.0.1:8000/api/save_chat_history", {
+      const chatHistoryRes = await fetch('http://localhost:8000/api/save_chat_history', {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

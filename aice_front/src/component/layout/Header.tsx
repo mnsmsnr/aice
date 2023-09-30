@@ -13,6 +13,8 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import { Button, CircularProgress, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+import FileCopyIcon from '@mui/icons-material/FileCopy';
 
 interface HeaderProps {
   tranceFlg: boolean;
@@ -32,8 +34,8 @@ export const Header: FC<HeaderProps> = ({
   const [auth, setAuth] = useState(false);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [dialogOpen, setDialogOpen] = useState(false);
-  const [email, setEmail] = useState('sample_user@mail.com');
-  const [password, setPassword] = useState('password1234');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   // ローディングアニメーション
   const [loading, setLoading] = useState<boolean>(false);
   const overlayStyle = {
@@ -58,7 +60,7 @@ export const Header: FC<HeaderProps> = ({
   const handleLogin = async () => {
     try {
       setLoading(true);
-      const response = await fetch('http://127.0.0.1:8000/api/login', {
+      const response = await fetch('http://localhost:8000/api/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -93,7 +95,7 @@ export const Header: FC<HeaderProps> = ({
   const handleLogout = async () => {
     try {
       setLoading(true);
-      await fetch('http://127.0.0.1:8000/api/logout', {
+      await fetch('http://localhost:8000/api/logout', {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -117,7 +119,7 @@ export const Header: FC<HeaderProps> = ({
   const getLoggedInUserInfo = async () => {
     const jwtToken = sessionStorage.getItem('token');
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/getLoggedInUserInfo', {
+      const response = await fetch('http://localhost:8000/api/getLoggedInUserInfo', {
         headers: {
           'Authorization': 'Bearer ' + jwtToken, 
         },
@@ -264,6 +266,18 @@ export const Header: FC<HeaderProps> = ({
             fullWidth
             margin="normal"
           />
+          <CopyToClipboard text="exsample@mail.co.jp">
+            <IconButton>
+              サンプルEmailコピー
+              <FileCopyIcon />
+            </IconButton>
+          </CopyToClipboard>
+          <CopyToClipboard text="password0001">
+            <IconButton>
+              サンプルpasswordコピー
+              <FileCopyIcon />
+            </IconButton>
+          </CopyToClipboard>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleDialogClose} color="primary">
